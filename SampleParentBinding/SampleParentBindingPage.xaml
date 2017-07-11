@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage x:Name="YourPageName" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:SampleParentBinding" x:Class="SampleParentBinding.SampleParentBindingPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout>
+                <Button Text="{Binding Filter}" Command="{Binding GotoFilterPageCommand}" />
+            </AbsoluteLayout>
+            <ListView x:Name="ListView" RowHeight="60" ItemsSource="{Binding CustomPins}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Favorite" Command="{Binding Path=BindingContext.AddToFavoriteCommand, Source={x:Reference YourPageName}}" />
+                                <MenuItem Text="..." CommandParameter="{Binding .}" Clicked="OnMoreClicked" />
+                            </ViewCell.ContextActions>
+                            <StackLayout Padding="5" Orientation="Vertical">
+                                <Label Text="{Binding Street}" FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
